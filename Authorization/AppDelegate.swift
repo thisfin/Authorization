@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-    // 
+    // MARK: - SFAuthorizationViewDelegate
     override func authorizationViewDidAuthorize(_ view: SFAuthorizationView!) {
         NSLog("authorizationViewDidAuthorize")
     }
