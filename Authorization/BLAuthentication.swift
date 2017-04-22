@@ -9,118 +9,98 @@
 import Cocoa
 
 class BLAuthentication: NSObject {
-//    var authorizationRef: AuthorizationRef?
-//    var delegate: BLAuthenticationDelegate?
-//
-//    private static let selfInstance = BLAuthentication()
-//
-//    public static var sharedInstance: BLAuthentication {
-//        return selfInstance
-//    }
-//
-//    override init() {
-//        super.init()
-//
-////        authorizationRef = Null
-////        delegate
-//    }
-//
-////    deinit {
-////
-////    }
-////
-////    // Returns the delegate
-////    - (id)delegate {
-////    return _delegate;
-////    }
-////
-////    // Sets the delegate
-////    - (void)setDelegate:(id)delegate  {
-////    _delegate = delegate;
-////    }
-////    // deauthenticates the user and deallocates memory
-////    - (void)dealloc {
-////    [self deauthenticate];
-////    [super dealloc];
-////    }
-//
-//    func isAuthenticated(command: String) -> Bool {
-//        var item: AuthorizationItem
-//        var rights: AuthorizationRights = AuthorizationRights()
-//        var authorizedRights: AuthorizationRights = AuthorizationRights()
-//        var flags: AuthorizationFlags
-//        var err: OSStatus = 0
-//
-//        if let ref = authorizationRef {
-//            rights.count = 0
-//            rights.items = nil
-//            flags = []
-//            err = AuthorizationCreate(&rights, nil, flags, UnsafeMutablePointer<AuthorizationRef?>(ref))
-//        }
-//
-//        var cmd: [CChar] = [CChar].init(repeating: 0, count: 1024)
-//        _ = command.getCString(&cmd, maxLength: 1024, encoding: .utf8)
-//
-//        item.name = UnsafePointer<Int8>(kAuthorizationRightExecute)
-//        item.value = UnsafeMutableRawPointer(Unmanaged<NSString>.passUnretained(command as NSString).toOpaque())
-//        item.valueLength = command.characters.count
-//        item.flags = 0
-//
-//        rights.count = 1
-//        rights.items = UnsafeMutablePointer<AuthorizationItem?>(mutating: UnsafePointer<AuthorizationItem?>(item))
-//
-//        flags = [.extendRights]
-//        err = AuthorizationCopyRights(authorizationRef!, &rights, nil, flags, &authorizedRights)
-//
-//        let authorized = (errAuthorizationSuccess == err)
-//
-//        if authorized {
-//            AuthorizationFreeItemSet(authorizedRights)
-//        }
-//
-//        return authorized
-//    }
-//
-////    - (BOOL)isAuthenticated:(NSString *)forCommand {
-////    AuthorizationItem items[1];
-////    AuthorizationRights rights;
-////    AuthorizationRights *authorizedRights;
-////    AuthorizationFlags flags;
-////
-////    OSStatus err = 0;
-////    BOOL authorized = NO;
-////    int i = 0;
-////
-////    if(_authorizationRef == NULL) {
-////    rights.count = 0;
-////    rights.items = NULL;
-////
-////    flags = kAuthorizationFlagDefaults;
-////    err = AuthorizationCreate(&rights, kAuthorizationEmptyEnvironment, flags, &_authorizationRef);
-////    }
-////
-////    char *command = malloc(sizeof(char) * 1024);
-////    [forCommand getCString:command maxLength:1024];
-////    items[0].name = kAuthorizationRightExecute;
-////    items[0].value = command;
-////    items[0].valueLength = strlen(command);
-////    items[0].flags = 0;
-////
-////    rights.count = 1;
-////    rights.items = items;
-////
-////    flags = kAuthorizationFlagExtendRights;
-////
-////    err = AuthorizationCopyRights(_authorizationRef, &rights, kAuthorizationEmptyEnvironment, flags, &authorizedRights);
-////
-////    authorized = (errAuthorizationSuccess == err);
-////
-////    if(authorized) {
-////    AuthorizationFreeItemSet(authorizedRights);
-////    }
-////    
-////    return authorized;
-////    }
+    var authorizationRef: AuthorizationRef?
+    var delegate: BLAuthenticationDelegate?
+
+    private static let selfInstance = BLAuthentication()
+
+    public static var sharedInstance: BLAuthentication {
+        return selfInstance
+    }
+
+    override init() {
+        super.init()
+    }
+
+    func isAuthenticated(command: String) -> Bool {
+        var item: AuthorizationItem
+        var rights: AuthorizationRights
+        var err: OSStatus = 0
+
+        if let _ = authorizationRef {
+            rights = AuthorizationRights.init(count: 0, items: nil)
+//            err = AuthorizationCreate(&rights, nil, [], UnsafeMutablePointer<AuthorizationRef?>(authorizationRef))
+            err = AuthorizationCreate(&rights, nil, [], &authorizationRef)
+        }
+
+        item = AuthorizationItem.init(name: kAuthorizationRightExecute,
+                                      valueLength: command.characters.count,
+                                      value: UnsafeMutableRawPointer(Unmanaged<NSString>.passUnretained(command as NSString).toOpaque()),
+                                      flags: 0)
+        var items = [item]
+        rights = AuthorizationRights.init(count: 1, items: &items)
+
+        var authorizedRights: UnsafeMutablePointer<AuthorizationRights>? = UnsafeMutablePointer<AuthorizationRights>.allocate(capacity: MemoryLayout.size(ofValue: AuthorizationRights()))
+
+        err = AuthorizationCopyRights(authorizationRef!, &rights, nil, [.extendRights], pointFromAddress(&authorizedRights))
+        let authorized = (errAuthorizationSuccess == err)
+        if authorized {
+            AuthorizationFreeItemSet(authorizedRights!)
+        }
+        return authorized
+    }
+
+    func fetchPassword(command: String) -> Bool {
+        var item: AuthorizationItem
+        var rights: AuthorizationRights
+        var err: OSStatus = 0
+
+        if let _ = authorizationRef {
+            rights = AuthorizationRights.init(count: 0, items: nil)
+            //            err = AuthorizationCreate(&rights, nil, [], UnsafeMutablePointer<AuthorizationRef?>(authorizationRef))
+            err = AuthorizationCreate(&rights, nil, [], &authorizationRef)
+        }
+
+        item = AuthorizationItem.init(name: kAuthorizationRightExecute,
+                                      valueLength: command.characters.count,
+                                      value: UnsafeMutableRawPointer(Unmanaged<NSString>.passUnretained(command as NSString).toOpaque()),
+                                      flags: 0)
+        var items = [item]
+        rights = AuthorizationRights.init(count: 1, items: &items)
+
+        var authorizedRights: UnsafeMutablePointer<AuthorizationRights>? = UnsafeMutablePointer<AuthorizationRights>.allocate(capacity: MemoryLayout.size(ofValue: AuthorizationRights()))
+
+        err = AuthorizationCopyRights(authorizationRef!, &rights, nil, [.extendRights, .interactionAllowed], pointFromAddress(&authorizedRights))
+        let authorized = (errAuthorizationSuccess == err)
+        if authorized {
+            AuthorizationFreeItemSet(authorizedRights!)
+            if let _ = delegate {
+                delegate?.authenticationDidAuthorize(authentication: self)
+            }
+        }
+        return authorized
+    }
+
+    func authenticate(command: String) -> Bool {
+        if !self.isAuthenticated(command: command) {
+            _ = self.fetchPassword(command: command)
+        }
+        return self.isAuthenticated(command: command)
+    }
+
+    func deauthenticate() {
+        if let _ = authorizationRef {
+            AuthorizationFree(authorizationRef!, [.destroyRights])
+            authorizationRef = nil
+            if let _ = delegate {
+                delegate?.authenticationDidDeauthorize(authentication: self)
+            }
+        }
+    }
+
+    private func pointFromAddress<T>(_ p: UnsafeMutablePointer<T>?) -> UnsafeMutablePointer<T>? {
+        return p
+    }
 }
 
 protocol BLAuthenticationDelegate {

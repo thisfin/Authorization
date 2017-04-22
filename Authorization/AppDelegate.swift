@@ -31,7 +31,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             defer: false)
         window.center()
         window.makeKeyAndOrderFront(self)
-        window.contentView?.addSubview(authView)
+
+        NSLog("\(BLAuthentication.sharedInstance.isAuthenticated(command: "ls /.Spotlight-V100/"))")
+        NSLog("\(BLAuthentication.sharedInstance.authenticate(command: "ls /.Spotlight-V100/"))")
+        NSLog("\(BLAuthentication.sharedInstance.isAuthenticated(command: "ls /.Spotlight-V100/"))")
+//        window.contentView?.addSubview(authView)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
