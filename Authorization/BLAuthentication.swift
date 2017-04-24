@@ -22,7 +22,7 @@ class BLAuthentication: NSObject {
         super.init()
     }
 
-    func isAuthenticated(command: String) -> Bool {
+    func isAuthenticated(_ command: String) -> Bool {
         var item: AuthorizationItem
         var rights: AuthorizationRights
         var err: OSStatus = 0
@@ -50,7 +50,7 @@ class BLAuthentication: NSObject {
         return authorized
     }
 
-    func fetchPassword(command: String) -> Bool {
+    func fetchPassword(_ command: String) -> Bool {
         var item: AuthorizationItem
         var rights: AuthorizationRights
         var err: OSStatus = 0
@@ -81,11 +81,11 @@ class BLAuthentication: NSObject {
         return authorized
     }
 
-    func authenticate(command: String) -> Bool {
-        if !self.isAuthenticated(command: command) {
-            _ = self.fetchPassword(command: command)
+    func authenticate(_ command: String) -> Bool {
+        if !self.isAuthenticated(command) {
+            _ = self.fetchPassword(command)
         }
-        return self.isAuthenticated(command: command)
+        return self.isAuthenticated(command)
     }
 
     func deauthenticate() {
@@ -106,8 +106,4 @@ class BLAuthentication: NSObject {
 protocol BLAuthenticationDelegate {
     func authenticationDidAuthorize(authentication: BLAuthentication)
     func authenticationDidDeauthorize(authentication: BLAuthentication)
-    func authenticationDidExecute(authentication: BLAuthentication)
-    func authenticationFailedExecute(authentication: BLAuthentication)
-    func authenticationDidKill(authentication: BLAuthentication)
-    func authenticationFailedKill(authentication: BLAuthentication)
 }

@@ -32,9 +32,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.center()
         window.makeKeyAndOrderFront(self)
 
-        NSLog("\(BLAuthentication.sharedInstance.isAuthenticated(command: "ls /.Spotlight-V100/"))")
-        NSLog("\(BLAuthentication.sharedInstance.authenticate(command: "ls /.Spotlight-V100/"))")
-        NSLog("\(BLAuthentication.sharedInstance.isAuthenticated(command: "ls /.Spotlight-V100/"))")
+        NSLog("\(BLAuthentication.sharedInstance.isAuthenticated("ls /.Spotlight-V100/"))")
+        NSLog("\(BLAuthentication.sharedInstance.authenticate("ls /.Spotlight-V100/"))")
+        NSLog("\(BLAuthentication.sharedInstance.isAuthenticated("ls /.Spotlight-V100/"))")
 //        window.contentView?.addSubview(authView)
     }
 
