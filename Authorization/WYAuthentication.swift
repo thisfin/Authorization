@@ -1,5 +1,5 @@
 //
-//  BLAuthentication.swift
+//  WYAuthentication.swift
 //  Authorization
 //
 //  Created by wenyou on 2017/4/20.
@@ -8,13 +8,14 @@
 
 import Cocoa
 
-class BLAuthentication: NSObject {
+// http://blog.laurent.etiemble.com/index.php?post/2005/12/05/36
+public class WYAuthentication: NSObject {
     var authorizationRef: AuthorizationRef?
-    var delegate: BLAuthenticationDelegate?
+    var delegate: WYAuthenticationDelegate?
 
-    private static let selfInstance = BLAuthentication()
+    private static let selfInstance = WYAuthentication()
 
-    public static var sharedInstance: BLAuthentication {
+    public static var sharedInstance: WYAuthentication {
         return selfInstance
     }
 
@@ -27,7 +28,7 @@ class BLAuthentication: NSObject {
         var rights: AuthorizationRights
         var err: OSStatus = 0
 
-        if let _ = authorizationRef {
+        if nil == authorizationRef {
             rights = AuthorizationRights.init(count: 0, items: nil)
 //            err = AuthorizationCreate(&rights, nil, [], UnsafeMutablePointer<AuthorizationRef?>(authorizationRef))
             err = AuthorizationCreate(&rights, nil, [], &authorizationRef)
@@ -103,7 +104,7 @@ class BLAuthentication: NSObject {
     }
 }
 
-protocol BLAuthenticationDelegate {
-    func authenticationDidAuthorize(authentication: BLAuthentication)
-    func authenticationDidDeauthorize(authentication: BLAuthentication)
+protocol WYAuthenticationDelegate {
+    func authenticationDidAuthorize(authentication: WYAuthentication)
+    func authenticationDidDeauthorize(authentication: WYAuthentication)
 }
