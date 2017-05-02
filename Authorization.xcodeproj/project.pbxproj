@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6654649E1EA8AA7E007D8B89 /* WYAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6654649D1EA8AA7E007D8B89 /* WYAuthentication.swift */; };
 		665464A51EA8AD59007D8B89 /* SecurityInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665464A41EA8AD59007D8B89 /* SecurityInterface.framework */; };
-		665465551EB1C38E007D8B89 /* FileWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665465541EB1C38E007D8B89 /* FileWatch.swift */; };
+		665465551EB1C38E007D8B89 /* WYFileWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665465541EB1C38E007D8B89 /* WYFileWatch.swift */; };
 		6660D3071EA753B400830C9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660D3061EA753B400830C9E /* AppDelegate.swift */; };
 		6660D3091EA753B400830C9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660D3081EA753B400830C9E /* ViewController.swift */; };
 		6660D30B1EA753B400830C9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6660D30A1EA753B400830C9E /* Assets.xcassets */; };
@@ -21,7 +21,7 @@
 		6654649D1EA8AA7E007D8B89 /* WYAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAuthentication.swift; sourceTree = "<group>"; };
 		665464A01EA8ACCF007D8B89 /* Authorization-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Authorization-Bridging-Header.h"; sourceTree = "<group>"; };
 		665464A41EA8AD59007D8B89 /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = System/Library/Frameworks/SecurityInterface.framework; sourceTree = SDKROOT; };
-		665465541EB1C38E007D8B89 /* FileWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileWatch.swift; sourceTree = "<group>"; };
+		665465541EB1C38E007D8B89 /* WYFileWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYFileWatch.swift; sourceTree = "<group>"; };
 		6660D3031EA753B400830C9E /* Authorization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Authorization.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6660D3061EA753B400830C9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6660D3081EA753B400830C9E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 				6660D3061EA753B400830C9E /* AppDelegate.swift */,
 				6660D3151EA7576100830C9E /* Application.swift */,
 				6654649D1EA8AA7E007D8B89 /* WYAuthentication.swift */,
-				665465541EB1C38E007D8B89 /* FileWatch.swift */,
+				665465541EB1C38E007D8B89 /* WYFileWatch.swift */,
 				6660D3181EA75F1700830C9E /* TextWindow.swift */,
 				6660D3081EA753B400830C9E /* ViewController.swift */,
 				6660D30A1EA753B400830C9E /* Assets.xcassets */,
@@ -161,7 +161,7 @@
 				6660D3091EA753B400830C9E /* ViewController.swift in Sources */,
 				6654649E1EA8AA7E007D8B89 /* WYAuthentication.swift in Sources */,
 				6660D3071EA753B400830C9E /* AppDelegate.swift in Sources */,
-				665465551EB1C38E007D8B89 /* FileWatch.swift in Sources */,
+				665465551EB1C38E007D8B89 /* WYFileWatch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

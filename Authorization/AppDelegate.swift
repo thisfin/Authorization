@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     static let windowSize = NSMakeSize(800, 500)
     var window: NSWindow!
     var authView: SFAuthorizationView!
-    var watch: FileWatch!
+    var watch: WYFileWatch!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         /*
@@ -42,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        let tmpfile = URL(fileURLWithPath: "~/b.txt")
 //        let tmpfile = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.autosavedInformationDirectory, .userDomainMask, true).first! + "b.txt")
         let tmpfile = URL.init(fileURLWithPath: NSHomeDirectory() + "/a.txt")
-        watch = try! FileWatch.init(paths: [tmpfile.path], createFlag: [.UseCFTypes, .FileEvents],/*, .IgnoreSelf, .NoDefer],*/ runLoop: RunLoop.current, latency: 1, eventHandler: { (event) in
+        watch = try! WYFileWatch.init(paths: [tmpfile.path], createFlag: [.UseCFTypes, .FileEvents],/*, .IgnoreSelf, .NoDefer],*/ runLoop: RunLoop.current, latency: 1, eventHandler: { (event) in
             NSLog("\(event.path) \(event.flag) \(event.eventID)")
         })
 

@@ -9,7 +9,7 @@
 import Foundation
 
 // https://github.com/soh335/FileWatch
-public class FileWatch {
+public class WYFileWatch {
     // wrap FSEventStreamEventFlags as  OptionSetType
     public struct EventFlag: OptionSet {
         public let rawValue: FSEventStreamEventFlags
@@ -87,7 +87,7 @@ public class FileWatch {
         }
 
         guard let eventStream = FSEventStreamCreate(kCFAllocatorDefault,
-                                                    FileWatch.StreamCallback,
+                                                    WYFileWatch.StreamCallback,
                                                     &ctx,
                                                     paths as CFArray,
                                                     FSEventStreamEventId(kFSEventStreamEventIdSinceNow),
@@ -122,7 +122,7 @@ public class FileWatch {
         eventPaths: UnsafeMutableRawPointer,
         eventFlags: UnsafePointer<FSEventStreamEventFlags>?,
         eventIds: UnsafePointer<FSEventStreamEventId>?) -> Void in
-        let `self` = unsafeBitCast(clientCallBackInfo, to: FileWatch.self)
+        let `self` = unsafeBitCast(clientCallBackInfo, to: WYFileWatch.self)
         guard let eventPathArray = unsafeBitCast(eventPaths, to: NSArray.self) as? [String] else {
             return
         }
